@@ -25,19 +25,19 @@ namespace NetTopologySuite.Utilities
         /// <returns>
         ///&lt;table cellspacing="0" class="dtTABLE"&gt;
         ///&lt;TR VALIGN="top"&gt;
-        ///	 &lt;TH width=50%&gt;Value&lt;/TH&gt;
+        ///    &lt;TH width=50%&gt;Value&lt;/TH&gt;
         ///&lt;TH width=50%&gt;Condition&lt;/TH&gt;
         ///&lt;/TR&gt;
         ///&lt;TR VALIGN="top"&gt;
-        ///	 &lt;TD width=50%&gt;Less than zero&lt;/TD&gt;
+        ///    &lt;TD width=50%&gt;Less than zero&lt;/TD&gt;
         ///&lt;TD width=50%&gt;&lt;I&gt;a&lt;/I&gt; is less than &lt;I&gt;b&lt;/I&gt;.&lt;/TD&gt;
         ///&lt;/TR&gt;
         ///&lt;TR VALIGN="top"&gt;
-        ///	 &lt;TD width=50%&gt;Zero&lt;/TD&gt;
+        ///    &lt;TD width=50%&gt;Zero&lt;/TD&gt;
         ///&lt;TD width=50%&gt;&lt;I&gt;a&lt;/I&gt; equals &lt;I&gt;b&lt;/I&gt;.&lt;/TD&gt;
         ///&lt;/TR&gt;
         ///&lt;TR VALIGN="top"&gt;
-        ///	 &lt;TD width=50%&gt;Greater than zero&lt;/TD&gt;
+        ///    &lt;TD width=50%&gt;Greater than zero&lt;/TD&gt;
         ///&lt;TD width=50%&gt;&lt;I&gt;a&lt;/I&gt; is greater than &lt;I&gt;b&lt;/I&gt;.&lt;/TD&gt;
         ///&lt;/TR&gt;
         ///&lt;/table&gt;

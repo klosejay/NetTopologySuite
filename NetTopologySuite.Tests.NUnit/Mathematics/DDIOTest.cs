@@ -20,9 +20,9 @@ namespace NetTopologySuite.Tests.NUnit.Mathematics
             CheckStandardNotation(0.0, "0.0");
 
             // cases where hi is a power of 10 and lo is negative
-            CheckStandardNotation(DD.ValueOf(1e12).Subtract(DD.ValueOf(1)),	"999999999999.0");
-            CheckStandardNotation(DD.ValueOf(1e14).Subtract(DD.ValueOf(1)),	"99999999999999.0");
-            CheckStandardNotation(DD.ValueOf(1e16).Subtract(DD.ValueOf(1)),	"9999999999999999.0");
+            CheckStandardNotation(DD.ValueOf(1e12).Subtract(DD.ValueOf(1)), "999999999999.0");
+            CheckStandardNotation(DD.ValueOf(1e14).Subtract(DD.ValueOf(1)), "99999999999999.0");
+            CheckStandardNotation(DD.ValueOf(1e16).Subtract(DD.ValueOf(1)), "9999999999999999.0");
 
             DD num8Dec = DD.ValueOf(-379363639).Divide(
                 DD.ValueOf(100000000));

@@ -484,7 +484,7 @@ namespace NetTopologySuite.Utilities
                 if (c < 0)
                     return _ttype = TT_EOF;
             }
-            _ttype = c;		/* Just to be safe */
+            _ttype = c; /* Just to be safe */
 
             /* Set peekc so that the next invocation of nextToken will read
              * another character unless peekc is reset in this invocation

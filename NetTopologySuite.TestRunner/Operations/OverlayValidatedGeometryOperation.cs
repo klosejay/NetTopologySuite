@@ -138,7 +138,7 @@ namespace Open.Topology.TestRunner.Operations
         private static void AreaValidate(IGeometry g0, IGeometry g1)
         {
             double areaDiff = AreaDiff(g0, g1);
-            //  	System.out.println("Area diff = " + areaDiff);
+            // System.out.println("Area diff = " + areaDiff);
             if (Math.Abs(areaDiff) > AreaDiffTol)
             {
                 string msg = "Operation result is invalid [AreaTest] (" + areaDiff + ")";

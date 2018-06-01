@@ -164,7 +164,7 @@ namespace RTools_NTS.Util
             get => (parseNumbers);
 /* dropped for speed, this means this property isn't accurate if
  * character types table is modified directly.
- * 			{
+ *          {
                 for (int i = '0'; i <= '9'; i++)
                 {
                     if (!IsCharType((char)i, CharTypeBits.Digit))
@@ -207,23 +207,23 @@ namespace RTools_NTS.Util
         {
             get => (parseHexNumbers);
             //{
-            //	for (int i = 'A'; i <= 'F'; i++)
-            //	{
-            //		if (!IsCharType((char)i, CharTypeBits.Digit))
-            //		{
-            //			return(false);
-            //		}
-            //	}
-            //	for (int i = 'a'; i <= 'f'; i++)
-            //	{
-            //		if (!IsCharType((char)i, CharTypeBits.Digit))
-            //		{
-            //			return(false);
-            //		}
-            //	}
-            //	if (!IsCharType('x', CharTypeBits.Digit)) return(false);
+            //    for (int i = 'A'; i <= 'F'; i++)
+            //    {
+            //        if (!IsCharType((char)i, CharTypeBits.Digit))
+            //        {
+            //            return(false);
+            //        }
+            //    }
+            //    for (int i = 'a'; i <= 'f'; i++)
+            //    {
+            //        if (!IsCharType((char)i, CharTypeBits.Digit))
+            //        {
+            //            return(false);
+            //        }
+            //    }
+            //    if (!IsCharType('x', CharTypeBits.Digit)) return(false);
             //
-            //	return(true);
+            //    return(true);
             //}
             set
             {
@@ -607,7 +607,7 @@ namespace RTools_NTS.Util
     /// ArrayList tokens = new ArrayList();
     /// if (!tokenizer.Tokenize(tokens))
     /// {
-    ///		// error handling
+    ///     // error handling
     /// }
     /// foreach (Token t in tokens) Console.WriteLine("t = {0}", t);
     /// </code>

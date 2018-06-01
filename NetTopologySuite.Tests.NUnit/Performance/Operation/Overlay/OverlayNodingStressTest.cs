@@ -51,7 +51,7 @@ namespace NetTopologySuite.Tests.NUnit.Performance.Operation.Overlay
                         + "  Noding failure count = " + _failureCount);
                 double ang1 = GetRandomDouble() * Math.PI;
                 double ang2 = GetRandomDouble() * Math.PI;
-                //			Geometry[] geom = generateGeometryStar(ang1, ang2);
+                // Geometry[] geom = generateGeometryStar(ang1, ang2);
                 IGeometry[] geom = GenerateGeometryAccum(ang1, ang2);
                 CheckIntersection(geom[0], geom[1]);
             }
