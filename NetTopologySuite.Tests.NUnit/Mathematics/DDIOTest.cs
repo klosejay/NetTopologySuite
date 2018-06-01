@@ -91,12 +91,12 @@ namespace NetTopologySuite.Tests.NUnit.Mathematics
                 .Negate(), 1e-32);
 
         /**
-		 * The Java double-precision constant 1.4 gives rise to a value which
-		 * differs from the exact binary representation down around the 17th decimal
-		 * place. Thus it will not compare exactly to the DoubleDouble
-		 * representation of the same number. To avoid this, compute the expected
-		 * value using full DD precision.
-		 */
+         * The Java double-precision constant 1.4 gives rise to a value which
+         * differs from the exact binary representation down around the 17th decimal
+         * place. Thus it will not compare exactly to the DoubleDouble
+         * representation of the same number. To avoid this, compute the expected
+         * value using full DD precision.
+         */
             CheckParse("1.4",
                 DD.ValueOf(14).Divide(DD.ValueOf(10)), 1e-30);
 

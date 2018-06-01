@@ -487,8 +487,8 @@ namespace NetTopologySuite.Utilities
             _ttype = c;		/* Just to be safe */
 
             /* Set peekc so that the next invocation of nextToken will read
-	         * another character unless peekc is reset in this invocation
-	         */
+             * another character unless peekc is reset in this invocation
+             */
             _peekc = NEED_CHAR;
 
             int ctype = c < 256 ? ct[c] : CT_ALPHA;

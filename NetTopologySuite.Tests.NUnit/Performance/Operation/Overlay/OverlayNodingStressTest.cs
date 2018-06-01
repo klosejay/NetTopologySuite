@@ -149,11 +149,11 @@ namespace NetTopologySuite.Tests.NUnit.Performance.Operation.Overlay
             var widthOffsety = (width / 2) * Math.Sin(angle + PiOver2);
 
             var pts = new[] {
-			        new Coordinate(baseCoord.X + posx + widthOffsetx, baseCoord.Y + posy + widthOffsety),
-			        new Coordinate(baseCoord.X + posx - widthOffsetx, baseCoord.Y + posy - widthOffsety),
-			        new Coordinate(baseCoord.X + negx - widthOffsetx, baseCoord.Y + negy - widthOffsety),
-			        new Coordinate(baseCoord.X + negx + widthOffsetx, baseCoord.Y + negy + widthOffsety),
-			        new Coordinate(0,0)
+                    new Coordinate(baseCoord.X + posx + widthOffsetx, baseCoord.Y + posy + widthOffsety),
+                    new Coordinate(baseCoord.X + posx - widthOffsetx, baseCoord.Y + posy - widthOffsety),
+                    new Coordinate(baseCoord.X + negx - widthOffsetx, baseCoord.Y + negy - widthOffsety),
+                    new Coordinate(baseCoord.X + negx + widthOffsetx, baseCoord.Y + negy + widthOffsety),
+                    new Coordinate(0,0)
             };
             // close polygon
             pts[4] = new Coordinate(pts[0]);

@@ -388,11 +388,11 @@ namespace NetTopologySuite.Operation.Buffer
         private void AddOutsideTurn(OrientationIndex orientation, bool addStartPoint)
         {
             /**
-  	         * Heuristic: If offset endpoints are very close together,
-  	         * just use one of them as the corner vertex.
-  	         * This avoids problems with computing mitre corners in the case
-  	         * where the two segments are almost parallel
-  	         * (which is hard to compute a robust intersection for).
+             * Heuristic: If offset endpoints are very close together,
+             * just use one of them as the corner vertex.
+             * This avoids problems with computing mitre corners in the case
+             * where the two segments are almost parallel
+             * (which is hard to compute a robust intersection for).
              */
             if (_offset0.P1.Distance(_offset1.P0) < _distance * OFFSET_SEGMENT_SEPARATION_FACTOR)
             {
@@ -592,8 +592,8 @@ namespace NetTopologySuite.Operation.Buffer
 
             /*
              * This computation is unstable if the offset segments are nearly collinear.
-  	         * Howver, this situation should have been eliminated earlier by the check for
-  	         * whether the offset segment endpoints are almost coincident
+             * Howver, this situation should have been eliminated earlier by the check for
+             * whether the offset segment endpoints are almost coincident
              */
             try
             {
