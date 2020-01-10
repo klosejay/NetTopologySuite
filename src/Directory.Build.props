@@ -81,14 +81,10 @@
     <AssemblyFileVersion>$(NtsMajorVersion).$(NtsMinorVersion).$(NtsPatchVersion).$(NtsBuildNumber)</AssemblyFileVersion>
     <InformationalVersion>$(NtsMajorVersion).$(NtsMinorVersion).$(NtsPatchVersion) (compatible with JTS $(JTSCompatibilityLevel))</InformationalVersion>
 
-    <Company>NetTopologySuite - Team</Company>
+    <Company>Gisoft Team</Company>
 
     <CopyrightPeople>$(Company)</CopyrightPeople>
-    <CopyrightPeople>$(CopyrightPeople), Diego Guidi</CopyrightPeople>
-    <CopyrightPeople>$(CopyrightPeople), John Diss (www.newgrove.com)</CopyrightPeople>
-    <CopyrightPeople>$(CopyrightPeople), Felix Obermaier (www.ivv-aachen.de)</CopyrightPeople>
-    <CopyrightPeople>$(CopyrightPeople), Todd Jackson</CopyrightPeople>
-    <CopyrightPeople>$(CopyrightPeople), Joe Amenta</CopyrightPeople>
+    <CopyrightPeople>$(CopyrightPeople), Klose Jay</CopyrightPeople>
     <Copyright>Copyright © 2006 - $([System.DateTime]::UtcNow.Year) $(CopyrightPeople)</Copyright>
   </PropertyGroup>
 

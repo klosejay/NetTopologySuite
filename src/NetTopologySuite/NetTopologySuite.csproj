@@ -5,18 +5,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <NoWarn>659,168,1587</NoWarn>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Label="Assembly Info">
-    <AssemblyTitle>NetTopologySuite</AssemblyTitle>
+    <AssemblyTitle>Gisoft.NetTopologySuite</AssemblyTitle>
     <Description>A .NET library for GIS operations, direct porting of JTS Topology Suite $(JTSCompatibilityLevel) library</Description>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet Package Info">
-    <PackageId>NetTopologySuite</PackageId>
-    <Title>NTS - Topology Suite</Title>
-    <Authors>NetTopologySuite - Team</Authors>
-    <Owners>NetTopologySuite - Team</Owners>
+    <PackageId>Gisoft.NetTopologySuite</PackageId>
+    <Title>Gisoft-Topology Suite</Title>
+    <Authors>Klose Jay, Gisoft-Team</Authors>
+    <Owners>Gisoft-Team</Owners>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Description>The NTS Topology Suite is an API for modelling and manipulating 2-dimensional linear geometry. It provides numerous geometric predicates and functions. NTS conforms to the Simple Features Specification.
