@@ -32,9 +32,12 @@ namespace NetTopologySuite.Geometries
         ///</summary>
         public const double NullOrdinate = double.NaN;
 
-        private protected double _x;
+        // Coordinate is auto-[Serializable], so replacing with auto properties could break compat.
+#pragma warning disable IDE0032
+        private double _x;
 
-        private protected double _y;
+        private double _y;
+#pragma warning restore IDE0032
 
         /// <summary>
         /// Gets or sets the X-ordinate value.

@@ -16,7 +16,7 @@ namespace NetTopologySuite.Tests.NUnit.Geometries.Implementation
     {
         [TestCase(15, 22, 5)]
         [TestCase(9, 13, 0)]
-        [TestCase(600, 3, 1)]
+        [TestCase(6, 3, 1)]
         [TestCase(2, 321, 123)]
         public void TestBaseBehaviorUsingDummySequence(int count, int dimension, int measures)
         {
@@ -76,13 +76,20 @@ namespace NetTopologySuite.Tests.NUnit.Geometries.Implementation
                     else
                     {
                         int measureIndex = dim - spatial;
-                        if (measureIndex >= measures)
+                        if (measureIndex >= measures || measureIndex >= 16)
                         {
                             continue;
                         }
 
                         ord = Ordinate.Measure1 + measureIndex;
                     }
+
+                    Assert.That(cs.TryGetOrdinateIndex(ord, out int ordinateIndex));
+                    Assert.That(ordinateIndex, Is.EqualTo(dim));
+                    Assert.That(reversed.TryGetOrdinateIndex(ord, out ordinateIndex));
+                    Assert.That(ordinateIndex, Is.EqualTo(dim));
+                    Assert.That(reversed2.TryGetOrdinateIndex(ord, out ordinateIndex));
+                    Assert.That(ordinateIndex, Is.EqualTo(dim));
 
                     var ordinatesFlag = (Ordinates)(1 << (int)ord);
                     Assert.That(cs.Ordinates.HasFlag(ordinatesFlag));
@@ -141,40 +148,6 @@ namespace NetTopologySuite.Tests.NUnit.Geometries.Implementation
                     }
                 }
 
-                // other spatial ordinates should be inaccessible, though no errors should be thrown
-                for (var ord = Ordinate.Spatial1 + spatial; ord <= Ordinate.Spatial16; ord++)
-                {
-                    var ordinatesFlag = (Ordinates)(1 << (int)ord);
-                    Assert.That(!cs.Ordinates.HasFlag(ordinatesFlag));
-                    Assert.That(!reversed.Ordinates.HasFlag(ordinatesFlag));
-                    Assert.That(!reversed2.Ordinates.HasFlag(ordinatesFlag));
-
-                    cs.SetOrdinate(i, ord, random.NextDouble());
-                    reversed.SetOrdinate(j, ord, random.NextDouble());
-                    reversed2.SetOrdinate(i, ord, random.NextDouble());
-
-                    Assert.That(cs.GetOrdinate(i, ord), Is.NaN);
-                    Assert.That(reversed.GetOrdinate(j, ord), Is.NaN);
-                    Assert.That(reversed2.GetOrdinate(i, ord), Is.NaN);
-                }
-
-                // other measure ordinates should be inaccessible, though no errors should be thrown
-                for (var ord = Ordinate.Measure1 + measures; ord <= Ordinate.Measure16; ord++)
-                {
-                    var ordinatesFlag = (Ordinates)(1 << (int)ord);
-                    Assert.That(!cs.Ordinates.HasFlag(ordinatesFlag));
-                    Assert.That(!reversed.Ordinates.HasFlag(ordinatesFlag));
-                    Assert.That(!reversed2.Ordinates.HasFlag(ordinatesFlag));
-
-                    cs.SetOrdinate(i, ord, random.NextDouble());
-                    reversed.SetOrdinate(j, ord, random.NextDouble());
-                    reversed2.SetOrdinate(i, ord, random.NextDouble());
-
-                    Assert.That(cs.GetOrdinate(i, ord), Is.NaN);
-                    Assert.That(reversed.GetOrdinate(j, ord), Is.NaN);
-                    Assert.That(reversed2.GetOrdinate(i, ord), Is.NaN);
-                }
-
                 var coord = cs.GetCoordinate(i);
                 var coordReversed = reversed.GetCoordinate(j);
                 var coordReversed2 = reversed2.GetCoordinate(i);
@@ -208,6 +181,66 @@ namespace NetTopologySuite.Tests.NUnit.Geometries.Implementation
                     Assert.That(coordToFill[dim], Is.EqualTo(coordinateTemplate[dim] + 3));
                     Assert.That(coordToFillReversed[dim], Is.EqualTo(coordinateTemplate[dim] + 3));
                     Assert.That(coordToFillReversed2[dim], Is.EqualTo(coordinateTemplate[dim] + 3));
+                }
+
+                // other (and undefined) ordinates should be inaccessible, though errors should only
+                // be thrown when accessing through the Coordinate object, unless the inaccessible
+                // Ordinate is Z or M, in which case it should silently give a NaN.  this is how JTS
+                // and older versions of NTS do it.  IMO all the ways of trying to access the value
+                // of an Ordinate should be consistent, but here we are (airbreather 2019-12-13).
+                var inaccessibleOrdinates = new List<Ordinate>
+                {
+                    // undefined ordinates should never be accessible, since each of the 32 defined
+                    // Ordinate values corresponds to a flag in the Ordinates enum.
+                    Ordinate.Spatial1 - 1,
+                    Ordinate.Measure16 + 1,
+                };
+                for (var ord = Ordinate.Spatial1 + spatial; ord <= Ordinate.Spatial16; ord++)
+                {
+                    inaccessibleOrdinates.Add(ord);
+                }
+
+                for (var ord = Ordinate.Measure1 + measures; ord <= Ordinate.Measure16; ord++)
+                {
+                    inaccessibleOrdinates.Add(ord);
+                }
+
+                foreach (var ord in inaccessibleOrdinates)
+                {
+                    if (ord >= Ordinate.Spatial1 && ord <= Ordinate.Measure16)
+                    {
+                        var ordinatesFlag = (Ordinates)(1 << (int)ord);
+                        Assert.That(!cs.Ordinates.HasFlag(ordinatesFlag));
+                        Assert.That(!reversed.Ordinates.HasFlag(ordinatesFlag));
+                        Assert.That(!reversed2.Ordinates.HasFlag(ordinatesFlag));
+                    }
+
+                    cs.SetOrdinate(i, ord, random.NextDouble());
+                    reversed.SetOrdinate(j, ord, random.NextDouble());
+                    reversed2.SetOrdinate(i, ord, random.NextDouble());
+
+                    Assert.That(cs.GetOrdinate(i, ord), Is.NaN);
+                    Assert.That(reversed.GetOrdinate(j, ord), Is.NaN);
+                    Assert.That(reversed2.GetOrdinate(i, ord), Is.NaN);
+
+                    if (ord == Ordinate.Z || ord == Ordinate.M)
+                    {
+                        Assert.That(coord[ord], Is.NaN);
+                        Assert.That(coordReversed[ord], Is.NaN);
+                        Assert.That(coordReversed2[ord], Is.NaN);
+                        Assert.That(coordCopy[ord], Is.NaN);
+                        Assert.That(coordCopyReversed[ord], Is.NaN);
+                        Assert.That(coordCopyReversed2[ord], Is.NaN);
+                    }
+                    else
+                    {
+                        Assert.That(() => coord[ord], Throws.InstanceOf<ArgumentOutOfRangeException>());
+                        Assert.That(() => coordReversed[ord], Throws.InstanceOf<ArgumentOutOfRangeException>());
+                        Assert.That(() => coordReversed2[ord], Throws.InstanceOf<ArgumentOutOfRangeException>());
+                        Assert.That(() => coordCopy[ord], Throws.InstanceOf<ArgumentOutOfRangeException>());
+                        Assert.That(() => coordCopyReversed[ord], Throws.InstanceOf<ArgumentOutOfRangeException>());
+                        Assert.That(() => coordCopyReversed2[ord], Throws.InstanceOf<ArgumentOutOfRangeException>());
+                    }
                 }
             }
 
